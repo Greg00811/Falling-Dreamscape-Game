@@ -50,14 +50,16 @@ public class GameManager : MonoBehaviour
         
     }
 
+    //this function spawns obstacles randomly between the values of the screen size with no rotation applied
     void CreateObstacles()
     {
         for (int i = 0; i < obstacleCount; i++)
         {
             Instantiate(
-                obstaclePrefab, 
-                new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize),
-                    Random.Range(-verticalScreenSize, verticalScreenSize),
+                obstaclePrefab,
+                new Vector3(
+                    Random.Range(-horizontalScreenSize, horizontalScreenSize),
+                    -verticalScreenSize + (i + 0.5f) * (2f * verticalScreenSize / obstacleCount),
                     0f
                 ),
                 Quaternion.identity

@@ -15,7 +15,7 @@ public class Obstacle : MonoBehaviour
         
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         float cameraYDelta = cameraTransform.position.y - previousCameraY; //subtracts camera's previous y pos from current y pos
         //adjusts obstacle to move in accordance to the camera's position
