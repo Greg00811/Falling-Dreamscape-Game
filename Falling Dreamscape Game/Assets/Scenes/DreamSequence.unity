@@ -583,7 +583,7 @@ MonoBehaviour:
   horizontalScreenSize: 6
   verticalScreenSize: 5
   cloudMove: 1
-  obstacleCount: 5
+  obstacleCount: 8
   cloudPrefab: {fileID: 8985274760749049599, guid: 2537f1623386032428f5c5616adb4262, type: 3}
   obstaclePrefab: {fileID: 1654658009732319879, guid: b407166f0d021a14fb858dd20873c26c, type: 3}
 --- !u!4 &568800486
