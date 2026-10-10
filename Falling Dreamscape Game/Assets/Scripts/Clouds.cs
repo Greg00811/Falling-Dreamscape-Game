@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Clouds : MonoBehaviour
 {
-
     private float speed;
     private float previousCameraY;
 

@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
     public float verticalScreenSize;
 
     public int cloudMove;
+    public int obstacleCount;
     public GameObject cloudPrefab;
+    public GameObject obstaclePrefab;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
         cloudMove = 1;
 
         CreateSky();
+        CreateObstacles();
     }
 
     // Update is called once per frame
@@ -35,8 +38,30 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < 30; i++)
         {
-            Instantiate(cloudPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize), Random.Range(-verticalScreenSize, verticalScreenSize), 0), Quaternion.identity);
+            Instantiate(
+                cloudPrefab, 
+                new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize),
+                    Random.Range(-verticalScreenSize, verticalScreenSize),
+                    0
+                ), 
+                Quaternion.identity
+            );
         }
         
+    }
+
+    void CreateObstacles()
+    {
+        for (int i = 0; i < obstacleCount; i++)
+        {
+            Instantiate(
+                obstaclePrefab, 
+                new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize),
+                    Random.Range(-verticalScreenSize, verticalScreenSize),
+                    0f
+                ),
+                Quaternion.identity
+            );
+        }
     }
 }
