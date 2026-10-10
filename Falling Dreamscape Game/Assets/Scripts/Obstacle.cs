@@ -6,6 +6,9 @@ public class Obstacle : MonoBehaviour
     private Transform cameraTransform; //gets camera position
     private float previousCameraY; //stores camera's y value from previous frame
     private GameManager gameManager; //refs game manager script
+    private bool hasCollided = false; //checks for collision
+
+    private Transform playerVisuals; //Ref to player sprite
 
     private void Start()
     {
@@ -35,6 +38,37 @@ public class Obstacle : MonoBehaviour
                 cameraTransform.position.y - gameManager.verticalScreenSize - 1f,
                 transform.position.z
             );
+        }
+    }
+
+    //checks for collision with player
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (hasCollided) return;
+
+        if (other.CompareTag("Player"))
+        {
+            hasCollided = true;
+            Time.timeScale = 0f; //freezes game
+
+            Rigidbody2D playerRb = other.GetComponent<Rigidbody2D>();
+
+            //freezes the player after collision
+            if (playerRb != null)
+            {
+                playerRb.linearVelocity = Vector2.zero;
+                playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
+            }
+
+            playerVisuals = other.transform.Find("Visuals");
+
+            //rotates player 90 deg
+            if (playerVisuals != null)
+            {
+                playerVisuals.rotation = Quaternion.Euler(0f, 0f, -90f);
+            }
+
+            Debug.Log("Player hit obstacle: " + gameObject.name);
         }
     }
 }
