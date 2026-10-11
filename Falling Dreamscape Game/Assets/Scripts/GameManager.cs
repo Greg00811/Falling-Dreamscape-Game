@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
                 obstaclePrefab,
                 new Vector3(
                     Random.Range(-horizontalScreenSize, horizontalScreenSize),
-                    -verticalScreenSize + (i + 0.5f) * (2f * verticalScreenSize / obstacleCount),
+                    -verticalScreenSize - 3f - (i * 5f), //obstacles spawn lower on screen and farther apart vertically
                     0f
                 ),
                 Quaternion.identity

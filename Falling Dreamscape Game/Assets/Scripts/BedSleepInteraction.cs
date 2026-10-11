@@ -10,8 +10,8 @@ public class BedSleepInteraction : MonoBehaviour
     
     private bool playerNearby = false; //Value that says whether or not player is near bed
     private Rigidbody2D playerRigidbody; //Freezes player position when sleeping
-
     private PlayerMovement playerMovement; //Ref to player movement
+    private ScreenFade screenFade; //Ref to fade script
 
     // Update is called once per frame
     void Update()
@@ -22,15 +22,19 @@ public class BedSleepInteraction : MonoBehaviour
             playerMovement.enabled = false; //disables movement when asleep
             transform.position = sleepPosition.position;
 
+            Vector3 playerScale = transform.localScale; //gets player scale
+            playerScale.x = Mathf.Abs(playerScale.x); //corrects the direction of the player when sleeping
+            transform.localScale = playerScale; //redefines player scale
+
             //turns off gravity and freezes player's position
             playerRigidbody.linearVelocity = Vector2.zero;
             playerRigidbody.gravityScale = 0f;
             playerRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             
             // Rotate the player's visuals to lie down
-            playerVisuals.localRotation = Quaternion.Euler(0f, 0f, -90f); //Quaternion.Euler converts angles into a rotation value
+            playerVisuals.localRotation = Quaternion.Euler(0f, 0f, 90f); //Quaternion.Euler converts angles into a rotation value
 
-            StartCoroutine(LoadDreamSequence(2f));
+            StartCoroutine(LoadDreamSequence(1.5f));
         }
     }
 
@@ -58,11 +62,18 @@ public class BedSleepInteraction : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
+        screenFade = FindFirstObjectByType<ScreenFade>(); //finds fade component
     }
 
     private IEnumerator LoadDreamSequence(float delay)
     {
         yield return new WaitForSeconds(delay);
+
+        //triggers fade
+        if (screenFade != null)
+        {
+            yield return screenFade.FadeToWhite();
+        }
 
         SceneManager.LoadScene("DreamSequence");
     }
