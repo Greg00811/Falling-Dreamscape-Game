@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bed
   - Obstacle
+  - Interact
   layers:
   - Default
   - TransparentFX

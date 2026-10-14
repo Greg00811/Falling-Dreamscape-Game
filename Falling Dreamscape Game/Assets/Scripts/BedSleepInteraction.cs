@@ -7,6 +7,7 @@ public class BedSleepInteraction : MonoBehaviour
     //These variables store the transform values of the sleep position above the bed and the player sprite
     [SerializeField] private Transform sleepPosition; 
     [SerializeField] private Transform playerVisuals;
+    [SerializeField] private GameObject interactionPrompt;
     
     private bool playerNearby = false; //Value that says whether or not player is near bed
     private Rigidbody2D playerRigidbody; //Freezes player position when sleeping
@@ -44,7 +45,12 @@ public class BedSleepInteraction : MonoBehaviour
         if (other.CompareTag("Bed"))
         {
             playerNearby = true;
-            Debug.Log("Player entered the bed trigger!");
+
+            //Unhides prompt if player enters trigger box
+            if (interactionPrompt != null)
+            {
+                interactionPrompt.SetActive(true);
+            }
         }
     
     }
@@ -54,6 +60,12 @@ public class BedSleepInteraction : MonoBehaviour
         if (other.CompareTag("Bed"))
         {
             playerNearby = false;
+
+            //Hides prompt if player exits trigger box
+            if (interactionPrompt != null)
+            {
+                interactionPrompt.SetActive(false);
+            }
         }
     }
 
