@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +12,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform playerVisuals; //creates ref to player sprite
+    [SerializeField] private Animator playerAnimator;
+
+    //Checks what scene the player is in and triggers fall animation in dream
+    private void Start()
+    {
+        if (playerAnimator == null) return;
+        //Checks if in dream scene
+        bool isDreamSequence = SceneManager.GetActiveScene().name == "DreamSequence";
+        //Sets IsFalling to be true if yes
+        playerAnimator.SetBool("IsFalling", isDreamSequence);
+    }
 
     void Update()
     {
