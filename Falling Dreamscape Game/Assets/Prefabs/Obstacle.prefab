@@ -153,3 +153,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   speed: 3
+  standingSprite: {fileID: -8432854835280897517, guid: 7c3e0938c1c3a5e4985aa1099abb2b55, type: 3}

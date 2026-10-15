@@ -11,6 +11,7 @@ public class Obstacle : MonoBehaviour
     private bool hasCollided = false; //checks for collision
     private ScreenFade screenFade; //refs fade script
 
+    [SerializeField] private Sprite standingSprite; //Ref to original sprite appearance
     private Transform playerVisuals; //Ref to player sprite
 
     private void Start()
@@ -78,13 +79,25 @@ public class Obstacle : MonoBehaviour
 
             playerVisuals = other.transform.Find("Visuals");
 
-            //rotates player 90 deg
+            //rotates player 90 deg and restores OG player sprite upon collision
             if (playerVisuals != null)
             {
+                Animator playerAnimator = playerVisuals.GetComponent<Animator>(); //Find the animator component on visuals
+                SpriteRenderer spriteRenderer = playerVisuals.GetComponent<SpriteRenderer>(); //Finds OG standing sprite
+
+                if (playerAnimator != null)
+                {
+                    playerAnimator.enabled = false;
+                }
+
+                if (spriteRenderer != null && standingSprite != null)
+                {
+                    spriteRenderer.sprite = standingSprite;
+                }
+                
                 playerVisuals.rotation = Quaternion.Euler(0f, 0f, -90f);
             }
 
-            Debug.Log("Player hit obstacle: " + gameObject.name);
         }
     }
 
