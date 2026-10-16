@@ -8,6 +8,7 @@ public class BedSleepInteraction : MonoBehaviour
     [SerializeField] private Transform sleepPosition; 
     [SerializeField] private Transform playerVisuals;
     [SerializeField] private GameObject interactionPrompt;
+    [SerializeField] private Animator playerAnimator; //Ref to animator component
     
     private bool playerNearby = false; //Value that says whether or not player is near bed
     private Rigidbody2D playerRigidbody; //Freezes player position when sleeping
@@ -20,6 +21,8 @@ public class BedSleepInteraction : MonoBehaviour
         //Allows the player to sleep and changes the current position to the sleep position
         if (playerNearby && Input.GetKeyDown(KeyCode.E))
         {
+            interactionPrompt.SetActive(false); //Hides Prompt Upon Interaction
+
             playerMovement.enabled = false; //disables movement when asleep
             transform.position = sleepPosition.position;
 
@@ -32,10 +35,9 @@ public class BedSleepInteraction : MonoBehaviour
             playerRigidbody.gravityScale = 0f;
             playerRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
             
-            // Rotate the player's visuals to lie down
-            playerVisuals.localRotation = Quaternion.Euler(0f, 0f, 90f); //Quaternion.Euler converts angles into a rotation value
+           playerAnimator.SetTrigger("Sleep"); //Triggers Sleep Trigger
 
-            StartCoroutine(LoadDreamSequence(1.5f));
+            StartCoroutine(LoadDreamSequence(5.5f));
         }
     }
 
