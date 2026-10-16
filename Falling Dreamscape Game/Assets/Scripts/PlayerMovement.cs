@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 8f;
+    private float speed = 6f;
     //private float jumpingPower = 16f;
     private bool isFacingRight = true;
 
@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
+        playerAnimator.SetBool("IsWalking", horizontal != 0f); //Starts walking if horizontal speed exceeds 0
     }
 
     private bool IsGrounded()
