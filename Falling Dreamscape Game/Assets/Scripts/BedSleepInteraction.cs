@@ -26,9 +26,9 @@ public class BedSleepInteraction : MonoBehaviour
             playerMovement.enabled = false; //disables movement when asleep
             transform.position = sleepPosition.position;
 
-            Vector3 playerScale = transform.localScale; //gets player scale
-            playerScale.x = Mathf.Abs(playerScale.x); //corrects the direction of the player when sleeping
-            transform.localScale = playerScale; //redefines player scale
+            Vector3 visualScale = playerVisuals.localScale; //gets scale of playerVisuals child obj
+            visualScale.x = Mathf.Abs(visualScale.x); //corrects the direction of the player when sleeping
+            playerVisuals.localScale = visualScale; //redefines scale
 
             //turns off gravity and freezes player's position
             playerRigidbody.linearVelocity = Vector2.zero;
