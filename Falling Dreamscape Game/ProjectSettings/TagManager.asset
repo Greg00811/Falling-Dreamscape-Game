@@ -7,6 +7,7 @@ TagManager:
   - Bed
   - Obstacle
   - Interact
+  - Collectible
   layers:
   - Default
   - TransparentFX
