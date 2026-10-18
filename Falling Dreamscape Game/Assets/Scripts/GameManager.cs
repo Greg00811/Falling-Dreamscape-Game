@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,8 +12,12 @@ public class GameManager : MonoBehaviour
 
     public int cloudMove;
     public int obstacleCount;
+    public int navyStarCount;
+    public int rainbowStarCount;
     public GameObject cloudPrefab;
     public GameObject obstaclePrefab;
+    public GameObject navyStarPrefab;
+    public GameObject rainbowStarPrefab;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,6 +29,8 @@ public class GameManager : MonoBehaviour
 
         CreateSky();
         CreateObstacles();
+        CreateNavyStars(navyStarCount);
+        CreateRainbowStars(rainbowStarCount);
     }
 
     // Update is called once per frame
@@ -64,6 +69,56 @@ public class GameManager : MonoBehaviour
                 ),
                 Quaternion.identity
             );
+        }
+    }
+
+    //this function spawns navy stars randomly between the values of the screen size with no rotation applied
+    //func is public so StarCollectible script can access
+    public void CreateNavyStars(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            Instantiate(
+                navyStarPrefab,
+                new Vector3(
+                    Random.Range(-horizontalScreenSize, horizontalScreenSize),
+                    Camera.main.transform.position.y - verticalScreenSize - 3f - (i * 5f), //new stars spawn lower on the screen
+                    0f
+                ),
+                Quaternion.identity
+            );
+        }
+    }
+
+    //this function spawns rainbow stars randomly between the values of the screen size with no rotation applied
+    public void CreateRainbowStars(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            Instantiate(
+                rainbowStarPrefab,
+                new Vector3(
+                    Random.Range(-horizontalScreenSize, horizontalScreenSize),
+                    Camera.main.transform.position.y - verticalScreenSize - 3f - (i * 5f), //new stars spawn lower on the screen
+                    0f
+                ),
+                Quaternion.identity
+            );
+        }
+    }
+
+    //initiates a delay before spawning another star
+    public IEnumerator RespawnStar(StarCollectible.StarType starType, float respawnDelay)
+    {
+        yield return new WaitForSeconds(respawnDelay);
+
+        if (starType == StarCollectible.StarType.Navy)
+        {
+            CreateNavyStars(1);
+        }
+        else if (starType == StarCollectible.StarType.Rainbow)
+        {
+            CreateRainbowStars(1);
         }
     }
 }

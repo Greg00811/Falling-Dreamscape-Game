@@ -7,6 +7,7 @@ TagManager:
   - Bed
   - Obstacle
   - Interact
+  - StarCollectible
   - Collectible
   layers:
   - Default

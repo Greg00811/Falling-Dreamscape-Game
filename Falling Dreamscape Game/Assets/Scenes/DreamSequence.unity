@@ -663,8 +663,12 @@ MonoBehaviour:
   verticalScreenSize: 5
   cloudMove: 1
   obstacleCount: 5
+  navyStarCount: 2
+  rainbowStarCount: 1
   cloudPrefab: {fileID: 8985274760749049599, guid: 2537f1623386032428f5c5616adb4262, type: 3}
   obstaclePrefab: {fileID: 1654658009732319879, guid: b407166f0d021a14fb858dd20873c26c, type: 3}
+  navyStarPrefab: {fileID: 609714186452374206, guid: e977d7ce4e4d0114f926541d53db4463, type: 3}
+  rainbowStarPrefab: {fileID: 1828314250830154307, guid: e9d032be17b7eb34aa48d77e611bef1a, type: 3}
 --- !u!4 &568800486
 Transform:
   m_ObjectHideFlags: 0
@@ -1201,7 +1205,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0050079823, y: 1.3820803}
+  m_Offset: {x: -0.00073862076, y: 0.6266131}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -1211,7 +1215,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.271833, y: 1.642375}
+  m_Size: {x: 1.5023787, y: 1.7871124}
   m_EdgeRadius: 0
 --- !u!50 &1821739801
 Rigidbody2D:
